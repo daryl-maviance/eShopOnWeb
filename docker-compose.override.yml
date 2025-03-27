@@ -9,6 +9,10 @@ services:
    volumes:
      - ~/.aspnet/https:/root/.aspnet/https:ro
      - ~/.microsoft/usersecrets:/root/.microsoft/usersecrets:ro
+   command: >
+      sh -c "dotnet ef database update -c catalogcontext -p ../Infrastucture.csproj -s web.csjproj &&
+             dotnet ef database update -c appidentitydbcontext -p ../Infrastucture.csproj -s web.csjproj &&
+             dotnet web.dll"
  eshoppublicapi:
    environment:
      - ASPNETCORE_ENVIRONMENT=Docker
